@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 const {
-  registrarUsuario, iniciarSesion
+  registrarUsuario, iniciarSesion, getPedidosByUsuario
 } = require('../controllers/user.controller.js');
 
  
@@ -14,6 +14,9 @@ router.get('/', function(req, res, next) {
 
 router.post('/iniciar-sesion', iniciarSesion);
 router.post('/registrar', registrarUsuario);
+// Agrega la nueva ruta para obtener los pedidos de un usuario
+router.get('/pedidos/:usuarioId', getPedidosByUsuario);
+
 
 module.exports = router;
 

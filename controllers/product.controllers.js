@@ -41,3 +41,15 @@ exports.deleteProductById = async (req, res) => {
     res.status(500).json({ error: 'Error al eliminar el producto' });
   }
 };
+
+// Controlador para obtener productos por categoría
+exports.getProductsByCategory = async (req, res) =>{
+  const { categoria } = req.params;
+  try {
+    // Consulta la base de datos para encontrar productos por categoría
+    const products = await product.find({ category: categoria });
+    res.status(200).json(products);
+  } catch (error) {
+    res.status(500).json({ error: 'Error al obtener productos por categoría' });
+  }
+};

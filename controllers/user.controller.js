@@ -39,6 +39,19 @@ async function iniciarSesion(req, res) {
   }
 }
 
+// Controlador para obtener pedidos de un usuario
+async function getPedidosByUsuario(req, res) {
+  const { usuarioId } = req.params;
+  try {
+    // Consulta la base de datos para encontrar los pedidos del usuario
+    const pedidos = await Pedido.find({ usuario: usuarioId });
+    res.status(200).json(pedidos);
+  } catch (error) {
+    res.status(500).json({ error: 'Error al obtener pedidos del usuario' });
+  }
+}
+
+
 module.exports = {
-	registrarUsuario, iniciarSesion
+	registrarUsuario, iniciarSesion, getPedidosByUsuario
 }

@@ -5,7 +5,11 @@ const {
   getAllProducts,
   updateProductById,
   deleteProductById,
+  getProductsByCategory,
 } = require('../controllers/product.controllers');
+
+// Ruta para obtener productos por categoría
+router.get('/productos/:categoria', getProductsByCategory);
 
 // Ruta para crear un nuevo producto
 router.post('/productos', createProduct);
