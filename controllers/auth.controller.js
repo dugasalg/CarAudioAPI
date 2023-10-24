@@ -68,9 +68,18 @@ async function iniciarSesion(req, res) {
   }
 }
 
+async function servicioPrueba(req,res){
+    console.log("Entro a funcion");
+    res.status(200).json(
+        {message:"CORRECTO"}
+
+    );
+}
+
 
 module.exports = {
     firmaJwt,
     verifyJwt,
-    iniciarSesion
+    iniciarSesion,
+    servicioPrueba
 }
