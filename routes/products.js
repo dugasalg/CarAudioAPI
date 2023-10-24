@@ -5,6 +5,7 @@ const {
   getAllProducts,
   updateProductById,
   deleteProductById,
+  getProductsByCategory,
 } = require('../controllers/product.controllers');
 
 // Ruta para crear un nuevo producto
@@ -18,5 +19,8 @@ router.put('/productos/:id', updateProductById);
 
 // Ruta para eliminar un producto por ID
 router.delete('/productos/:id', deleteProductById);
+
+// Ruta para obtener todos los productos de una categoría específica
+router.get('/productos/categoria/:category', getProductsByCategory);
 
 module.exports = router;

@@ -6,7 +6,7 @@ const { head } = require('../routes');
 async function firmaJwt(req, res) {
     try {
         const nuevoToken = await jwt.sign(
-            { email: "varelahiram55@gmail.com" },
+            { email: "salgado@gmail.com" },
             config.auth.secretKey,
             { algorithm: 'HS256' }
         );
@@ -20,8 +20,16 @@ async function firmaJwt(req, res) {
             message: "Error al crear el token jwt"
         });
     }
-
 }
+
+async function servicioPrueba(req,res){
+    console.log("Entro a funcion");
+    res.status(200).json(
+        {message:"CORRECTO"}
+
+    );
+}
+
 async function verifyJwt(req, res,next) {
     const headerToken = req.headers.authorization;
     let authToken;
@@ -47,5 +55,6 @@ async function verifyJwt(req, res,next) {
 }
 module.exports = {
     firmaJwt,
-    verifyJwt
+    verifyJwt,
+    servicioPrueba
 }

@@ -41,3 +41,13 @@ exports.deleteProductById = async (req, res) => {
     res.status(500).json({ error: 'Error al eliminar el producto' });
   }
 };
+
+exports.getProductsByCategory = async (req, res) => {
+  const { category } = req.params;  // obtenemos la categoría desde los parámetros de la ruta
+  try {
+    const products = await product.find({ category: category });  // buscamos todos los productos que coincidan con esa categoría
+    res.status(200).json(products);
+  } catch (error) {
+    res.status(500).json({ error: 'Error al obtener los productos de la categoría especificada' });
+  }
+};
