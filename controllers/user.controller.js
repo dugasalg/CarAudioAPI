@@ -52,6 +52,64 @@ async function getPedidosByUsuario(req, res) {
 }
 
 
+// Controlador para actualizar la información del usuario
+async function actualizarUsuario(req, res) {
+  const { id } = req.params;
+  const { datosActualizados } = req.body;
+  
+  try { 
+    const usuario = await User.findById(id);
+    if (!usuario) {
+    return res.status(404).json({ mensaje: 'Usuario no encontrado' });
+    }
+    
+    //Verifica si el usuario tiene permiso para actualizar esta información (por ejemplo, es el propietario de la cuenta)
+    if (usuario.id !== req.user.id) {
+    return res.status(403).json({ mensaje: 'No tienes permiso para actualizar esta cuenta' });
+    }
+    
+    //Actualiza la información del usuario
+    usuario.nombre = datosActualizados.nombre;
+    usuario.username = datosActualizados.username;
+    usuario.password = datosActualizados.password;
+    
+    await usuario.save();
+    
+    res.status(200).json({ mensaje: 'Información del usuario actualizada con éxito' });
+  } catch (error) {
+    res.status(500).json({ error: 'Error al actualizar la información del usuario' });
+  }
+}
+
+// Controlador para eliminar lógicamente la cuenta del usuario
+async function eliminarUsuarioLogico(req, res) {
+  const { id } = req.params;
+
+  try {
+    
+    const usuario = await User.findById(id);
+    if (!usuario) {
+    return res.status(404).json({ mensaje: 'Usuario no encontrado' });
+    }
+    
+    // // Verifica si el usuario tiene permiso para eliminar su cuenta
+    if (usuario.id !== req.user.id) {
+    return res.status(403).json({ mensaje: 'No tienes permiso para eliminar esta cuenta' });
+    }
+    
+    //Marca el usuario como inactivo o establece un estado de eliminación lógica
+    usuario.estado = 'inactivo'; 
+    
+    await usuario.save();
+    
+    res.status(200).json({ mensaje: 'Cuenta de usuario eliminada lógicamente' });
+  } catch (error) {
+    res.status(500).json({ error: 'Error al eliminar lógicamente la cuenta del usuario' });
+  }
+}
+
+
+
 module.exports = {
-	registrarUsuario, iniciarSesion, getPedidosByUsuario
+	registrarUsuario, iniciarSesion, getPedidosByUsuario, actualizarUsuario, eliminarUsuarioLogico
 }

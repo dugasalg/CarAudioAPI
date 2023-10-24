@@ -16,6 +16,12 @@ router.post('/iniciar-sesion', iniciarSesion);
 router.post('/registrar', registrarUsuario);
 // Ruta para obtener los pedidos de un usuario
 router.get('/pedidos/:usuarioId', getPedidosByUsuario);
+// Ruta para actualizar la información del usuario
+router.put('/usuario/:id', actualizarUsuario);
+// Ruta para eliminar lógicamente la cuenta del usuario
+router.delete('/usuario/:id', eliminarUsuarioLogico);
+
+
 
 
 module.exports = router;
