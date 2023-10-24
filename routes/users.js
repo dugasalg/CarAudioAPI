@@ -14,7 +14,7 @@ router.get('/', function(req, res, next) {
 
 router.post('/iniciar-sesion', iniciarSesion);
 router.post('/registrar', registrarUsuario);
-// Agrega la nueva ruta para obtener los pedidos de un usuario
+// Ruta para obtener los pedidos de un usuario
 router.get('/pedidos/:usuarioId', getPedidosByUsuario);
 
 
