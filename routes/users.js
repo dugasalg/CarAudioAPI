@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 const {
-  registrarUsuario, iniciarSesion, getPedidosByUsuario
+  registrarUsuario, iniciarSesion, getPedidosByUsuario, actualizarUsuario, eliminarUsuarioLogico
 } = require('../controllers/user.controller.js');
 
  
