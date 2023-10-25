@@ -11,6 +11,7 @@ const authRouter = require('./routes/auth');
 var productRouter = require('./routes/products');  
 var CategoriasRouter = require('./routes/categorias');
 var CotizacionesRouter = require('./routes/cotizaciones');
+var favoriteRoutes = require('./routes/favorite');
 
 // info db
 const databaseURL = "mongodb+srv://9317:T3hVx0DXGTHq6E5N@cluster0.srwwqwh.mongodb.net/"
@@ -38,6 +39,7 @@ app.use('/auth', authRouter);
 app.use('/product', productRouter)
 app.use('/categorias', CategoriasRouter)
 app.use('/cotizaciones', CotizacionesRouter)
+app.use('/favorite',favoriteRoutes)
 
 
 // catch 404 and forward to error handler

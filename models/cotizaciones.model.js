@@ -20,11 +20,7 @@ const quotationSchema = new mongoose.Schema({
   date: {
     type: Date,
     default: Date.now
-  },
-  notes: {
-    type: String,
-    required: false,
-  },
+  }
 });
 
 const quotation = mongoose.model('cotizaciones', quotationSchema);
