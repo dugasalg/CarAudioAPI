@@ -8,7 +8,7 @@ const { head } = require('../routes');
 async function firmaJwt(req, res) {
     try {
         const nuevoToken = await jwt.sign(
-            { email: "varelahiram55@gmail.com" },
+            { email: "salgado@gmail.com" },
             config.auth.secretKey,
             { algorithm: 'HS256' }
         );
