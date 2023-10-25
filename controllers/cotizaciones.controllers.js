@@ -41,3 +41,14 @@ exports.deleteQuotationById = async (req, res) => {
     res.status(500).json({ error: 'Error al eliminar la cotización' });
   }
 };
+
+exports.getCotizacionesPorUsuario = async (req, res) => {
+  const { userId } = req.params;
+
+  try {
+    const quotations = await Quotation.find({ userId }).populate('productIds');
+    res.status(200).json(quotations);
+  } catch (error) {
+    res.status(500).json({ error: 'Error al obtener las cotizaciones del usuario' });
+  }
+};

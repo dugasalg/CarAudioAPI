@@ -39,6 +39,7 @@ app.use('/product', productRouter)
 app.use('/categorias', CategoriasRouter)
 app.use('/cotizaciones', CotizacionesRouter)
 
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
