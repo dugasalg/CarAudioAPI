@@ -22,8 +22,13 @@ async function iniciarSesion(req, res) {
   const nombreUsuario = req.body.usrn;
   const pass = req.body.password;
 
+  console.log(nombreUsuario);
+  console.log(pass);
+
   try {
     const usuario = await User.findOne({ username: nombreUsuario, password: pass });
+
+    console.log(usuario);
 
     if (!usuario) {
       return res.status(401).json({ mensaje: "Nombre de usuario o contraseña incorrectos" });
