@@ -1,9 +1,12 @@
 var createError = require('http-errors');
 var express = require('express');
+var cors = require('cors')
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const mongoose = require('mongoose');
+
+app.use(cors())
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -12,9 +15,8 @@ var productRouter = require('./routes/products');
 var CategoriasRouter = require('./routes/categorias');
 var CotizacionesRouter = require('./routes/cotizaciones');
 var favoriteRoutes = require('./routes/favorite');
-var cors = require('cors')
 
-app.use(cors())
+
 
 // info db
 const databaseURL = "mongodb+srv://9317:T3hVx0DXGTHq6E5N@cluster0.srwwqwh.mongodb.net/"
