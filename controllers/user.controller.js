@@ -1,22 +1,30 @@
 const User = require("../models/user.models").User;
 
-async function registrarUsuario(req, res){
-	const nombreUsuario = req.body.usrn;
-	const pass = req.body.password;
+async function registrarUsuario(req, res) {
+  const nombreUsuario = req.body.usrn;
+  const pass = req.body.password;
+  const correo = req.body.email;          // Agregado
+  const fechaNacimiento = req.body.birthDate; // Agregado
+  const domicilio = req.body.address;     // Agregado
 
-	try {
-		const newUser = await new User({
-			username:nombreUsuario,
-			password: pass
-		}).save();
+  try {
+      const newUser = await new User({
+          username: nombreUsuario,
+          password: pass,
+          email: correo,                // Agregado
+          birthDate: fechaNacimiento,   // Agregado
+          address: domicilio            // Agregado
+      }).save();
 
-		res.json({
-			obj: newUser
-		})
-	} catch (err) {
-		console.log(err);
-	}
+      res.json({
+          obj: newUser
+      });
+  } catch (err) {
+      console.log(err);
+      res.status(500).send('Error al registrar el usuario');
+  }
 }
+
 
 async function iniciarSesion(req, res) {
   const nombreUsuario = req.body.usrn;
