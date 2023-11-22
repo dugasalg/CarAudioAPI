@@ -40,6 +40,8 @@ async function iniciarSesion(req, res) {
       return res.status(401).json({ mensaje: "Nombre de usuario o contraseña incorrectos" });
     }
 
+    const token = jwt.sign({ usuario: usuarioValido.username }, config.auth.secretKey, { algorithm: 'HS256' });
+
     res.json({
       mensaje: "Inicio de sesión exitoso",
       usuario: usuario
