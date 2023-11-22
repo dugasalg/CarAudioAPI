@@ -3,7 +3,6 @@ const User = require("../models/user.models").User;
 async function registrarUsuario(req, res) {
   const nombreUsuario = req.body.usrn;
   const pass = req.body.password;
-  const correo = req.body.email;          // Agregado
   const fechaNacimiento = req.body.birthDate; // Agregado
   const domicilio = req.body.address;     // Agregado
 
@@ -11,7 +10,6 @@ async function registrarUsuario(req, res) {
       const newUser = await new User({
           username: nombreUsuario,
           password: pass,
-          email: correo,                // Agregado
           birthDate: fechaNacimiento,   // Agregado
           address: domicilio            // Agregado
       }).save();
