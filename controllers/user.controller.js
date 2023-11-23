@@ -61,14 +61,18 @@ async function loginUsuario(req,res){
               console.log(err)
               res.status(500).json({
                   
-                  message: "Error de autenticacion"
+                  message: "Error de autenticacion",
+                  jwt: ""
+
+
               })
           }
       
       }else{
           res.status(401).json({
                   
-              message: "Contraseña Incorrecta"
+              message: "Contraseña Incorrecta",
+              jwt: ""
           })
       }
 
