@@ -22,13 +22,19 @@ async function registrarUsuario(req, res) {
       }).save();
 
       res.json({
+            message: "Usuario registrado correctamente",
           obj: newUser
       });
   } catch (err) {
       console.log(err);
-      res.status(500).send('Error al registrar el usuario');
-  }
+      res.status(500).json({
+                  
+        message: "Error de autenticacion",
+        obj: {}
+      });
+    }
 }
+
 
 
 async function loginUsuario(req,res){
