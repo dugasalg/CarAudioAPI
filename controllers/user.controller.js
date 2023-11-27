@@ -12,11 +12,7 @@ async function registrarUsuario(req, res) {
   const pass = req.body.password;
   const fechaNacimiento = req.body.birthDate; // Agregado
   const domicilio = req.body.address;     // Agregado
-
-    if (!nombreUsuario || !pass || !fechaNacimiento || !domicilio){
-    return res.status(400).json({mensaje: "Todos los campos son obligatorios"})
-  }
-
+  
   try {
       const newUser = await new User({
           username: nombreUsuario,
