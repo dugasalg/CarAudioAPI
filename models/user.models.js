@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema({
     },
     birthDate: {
         type: String,
-        required: false
+        required: true
     },
     address: {
         type: String,
