@@ -19,7 +19,7 @@ var favoriteRoutes = require('./routes/favorite');
 const authRouter = require('./routes/auth');
 
 // info db
-const databaseURL = "mongodb+srv://9317:T3hVx0DXGTHq6E5N@cluster0.srwwqwh.mongodb.net/"
+const databaseURL = "mongodb+srv://9317:KJlc5A1q6KLWZN64@cluster0.srwwqwh.mongodb.net/"
 mongoose.connect(databaseURL);
 mongoose.connection.on('open', function(){
   console.log("Connection OK")
