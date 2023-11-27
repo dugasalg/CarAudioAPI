@@ -3,15 +3,17 @@ const User = require("../models/user.models").User;
 async function registrarUsuario(req, res) {
   const nombreUsuario = req.body.usrn;
   const pass = req.body.password;
-  const correo = req.body.email;          // Agregado
   const fechaNacimiento = req.body.birthDate; // Agregado
   const domicilio = req.body.address;     // Agregado
+
+  if (nombreUsuario === null|| pass === null || fechaNacimiento === null || domicilio === null){
+    return res.status(400).json({mensaje: "Todos los campos son obligatorios"})
+  }
 
   try {
       const newUser = await new User({
           username: nombreUsuario,
           password: pass,
-          email: correo,                // Agregado
           birthDate: fechaNacimiento,   // Agregado
           address: domicilio            // Agregado
       }).save();
