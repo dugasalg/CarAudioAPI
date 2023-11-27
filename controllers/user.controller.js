@@ -12,7 +12,7 @@ async function registrarUsuario(req, res) {
   const pass = req.body.password;
   const fechaNacimiento = req.body.birthDate; // Agregado
   const domicilio = req.body.address;     // Agregado
-
+  
   try {
       const newUser = await new User({
           username: nombreUsuario,
