@@ -10,8 +10,8 @@ const userSchema = new mongoose.Schema({
         required: true
     },
     birthDate: {
-        type: Date,
-        require: true
+        type: String,
+        required: false
     },
     address: {
         type: String,

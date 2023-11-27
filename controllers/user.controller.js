@@ -13,7 +13,7 @@ async function registrarUsuario(req, res) {
   const fechaNacimiento = req.body.birthDate; // Agregado
   const domicilio = req.body.address;     // Agregado
 
-  if (nombreUsuario === null|| pass === null || fechaNacimiento === null || domicilio === null){
+    if (!nombreUsuario || !pass || !fechaNacimiento || !domicilio){
     return res.status(400).json({mensaje: "Todos los campos son obligatorios"})
   }
 
