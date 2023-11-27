@@ -1,21 +1,22 @@
 var createError = require('http-errors');
 var express = require('express');
-var cors = require('cors')
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-const mongoose = require('mongoose');
 
+
+
+
+const mongoose = require('mongoose')
+var cors = require('cors')
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-const authRouter = require('./routes/auth');
-var productRouter = require('./routes/products');  
-var CategoriasRouter = require('./routes/categorias');
-var CotizacionesRouter = require('./routes/cotizaciones');
+var productRouter = require('./routes/products');
+var categoryRouter = require('./routes/categorias');
 var favoriteRoutes = require('./routes/favorite');
 
-
+const authRouter = require('./routes/auth');
 
 // info db
 const databaseURL = "mongodb+srv://9317:T3hVx0DXGTHq6E5N@cluster0.srwwqwh.mongodb.net/"
@@ -26,7 +27,7 @@ mongoose.connection.on('open', function(){
 
 
 var app = express();
-app.use(cors())
+app.use(cors());
 
 
 // view engine setup
@@ -41,11 +42,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/auth', authRouter);
-app.use('/product', productRouter)
-app.use('/categorias', CategoriasRouter)
-app.use('/cotizaciones', CotizacionesRouter)
+app.use('/products', productRouter);
+app.use('/categorias', categoryRouter);
 app.use('/favorite',favoriteRoutes)
+app.use('/auth',authRouter);
+
 
 
 // catch 404 and forward to error handler

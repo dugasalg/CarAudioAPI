@@ -1,18 +1,12 @@
 var express = require('express');
 var router = express.Router();
 
-const  {
-    firmaJwt,
-    verifyJwt,
-    iniciarSesion,
-    servicioPrueba
-} = require('../controllers/auth.controller')
-/* GET home page. */
-router.post('/get-jwt', firmaJwt );
-router.post('/verify-jwt', verifyJwt );
-// Ruta para iniciar sesión y obtener un token JWT
-router.post('/login', verifyJwt, iniciarSesion);
-router.post('/test', verifyJwt,servicioPrueba);
+const{firmarjwt,verifyjwt,servicioPrueba} = require('../controllers/auth.controller');
+
+
+router.post('/get-jwt',firmarjwt);
+router.post('/verify-jwt',verifyjwt);
+router.post('/test',verifyjwt,servicioPrueba)
 
 
 module.exports = router;
