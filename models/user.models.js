@@ -11,11 +11,11 @@ const userSchema = new mongoose.Schema({
     },
     birthDate: {
         type: String,
-        require: false
+        required: false
     },
     address: {
         type: String,
-        require: true
+        required: true
     }
 });
 
