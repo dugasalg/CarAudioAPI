@@ -53,3 +53,13 @@ exports.getProductsByCategory = async (req, res) =>{
     res.status(500).json({ error: 'Error al obtener productos por categoría' });
   }
 };
+
+exports.getProductsById = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const product = await product.findById(id);
+    res.status(200).json(product);
+  } catch (error) {
+    res.status(500).json({ error: 'Error al obtener el producto' });
+  }
+}
