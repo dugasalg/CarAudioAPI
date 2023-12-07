@@ -52,3 +52,14 @@ exports.crearCarrito = async (req, res) => {
     res.status(500).json({ error: 'Error interno del servidor' });
   }
 };
+
+//Recuperar un carrito por medio de ID
+exports.getCarritobyId = async(req, res) => {
+  const {id} = req.params;
+  try{
+    const carrito = await Carrito.findById(id);
+    res.status(200).json(carrito);
+  } catch (error){
+    res.status(500).json({error: 'Error al obtener carrito'});
+  }
+};
