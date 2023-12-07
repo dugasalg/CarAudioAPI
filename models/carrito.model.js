@@ -9,4 +9,5 @@ const Carrito = mongoose.model('Carrito', carritoSchema);
 
 module.exports = {
   Carrito,
+  carritoSchema
 };

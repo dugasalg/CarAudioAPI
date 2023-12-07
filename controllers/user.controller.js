@@ -6,6 +6,7 @@ const {config} = require('../config/config');
 
 
 const User = require("../models/user.models").User;
+const {Carrito} = require('../models/carrito.model');
 
 async function registrarUsuario(req, res) {
   const nombreUsuario = req.body.usrn;
@@ -18,21 +19,15 @@ async function registrarUsuario(req, res) {
           username: nombreUsuario,
           password: pass,
           birthDate: fechaNacimiento,   // Agregado
-          address: domicilio            // Agregado
+          address: domicilio,          // Agregado
+          carritos: []
       }).save();
 
-      res.json({
-            message: "Usuario registrado correctamente",
-          obj: newUser
-      });
-  } catch (err) {
-      console.log(err);
-      res.status(500).json({
-                  
-        message: "Error de autenticacion",
-        obj: {}
-      });
-    }
+        res.status(201).json({ mensaje: 'Usuario creado', usuarioId: newUser._id });
+    } catch (error) {
+    console.error('Error al crear el usuario:', error);
+    res.status(500).json({ error: 'Error interno del servidor' });
+  }
 }
 
 
@@ -113,4 +108,45 @@ async function editarUsuario(req,res){
 
 };
 
-module.exports = {registrarUsuario, loginUsuario}
+
+// En user.controller.js
+
+async function agregarCarritoPorId(req, res) {
+    try {
+      // Obtener el ID del usuario de los parámetros de la ruta
+      const { idUsuario } = req.params;
+  
+      // Obtener el ID del carrito del cuerpo de la solicitud
+      const { carritoId } = req.body;
+  
+      // Verificar si el usuario existe
+      const usuario = await User.findById(idUsuario);
+      if (!usuario) {
+        return res.status(404).json({ error: 'Usuario no encontrado' });
+      }
+  
+      // Verificar si el carrito existe
+      const carrito = await Carrito.findById(carritoId);
+      if (!carrito) {
+        return res.status(404).json({ error: 'Carrito no encontrado' });
+      }
+  
+      // Agregar el carrito al usuario
+      usuario.carritos.push(carrito);
+  
+      // Guardar el usuario actualizado
+      const usuarioActualizado = await usuario.save();
+  
+      res.status(201).json({
+        mensaje: 'Carrito agregado al usuario',
+        usuario: usuarioActualizado,
+      });
+    } catch (error) {
+      console.error('Error al agregar el carrito al usuario', error);
+      res.status(500).json({ error: 'Error interno del servidor' });
+    }
+  };
+  
+
+
+module.exports = {registrarUsuario, loginUsuario, agregarCarritoPorId}

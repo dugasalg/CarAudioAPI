@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const {carritoSchema} = require('./carrito.model');
 
 const userSchema = new mongoose.Schema({
     username: {
@@ -16,7 +17,8 @@ const userSchema = new mongoose.Schema({
     address: {
         type: String,
         required: true
-    }
+    },
+    carritos: [carritoSchema]
 });
 
 const User = mongoose.model('User', userSchema);
