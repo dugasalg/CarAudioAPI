@@ -1,5 +1,5 @@
 const { quotation } = require('../models/cotizaciones.model');
-const User = require('./models/user.model');
+const User = require('../models/user.models');
 const mongoose = require('mongoose');
 
 
@@ -58,7 +58,7 @@ exports.getCotizacionesPorUsuario = async (req, res) => {
 
 // Sumar las cotizaciones de un usuario
 exports.getTotalQuotationsByUser = async (req, res) => {
-  const { userId } = req.params;
+  const { userId } = req.params.userId;
 
   // Validación de userId
   if (!userId || typeof userId !== 'string') {
@@ -81,7 +81,7 @@ exports.getTotalQuotationsByUser = async (req, res) => {
     // Asume que el identificador del usuario está asociado a las cotizaciones de alguna manera
     const quotations = await quotation.find({ userId: userId });
     const total = quotations.reduce((sum, quotation) => sum + quotation.totalPrice, 0);
-
+    
     res.status(200).json({ total });
   } catch (error) {
     res.status(500).json({ error: 'Error al calcular el total de las cotizaciones' });

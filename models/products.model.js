@@ -8,7 +8,7 @@ const productSchema = new mongoose.Schema({
   category: {
     type: String,
     required: true,
-  }, 
+  },
   price: {
     type: Number,
     required: true,
@@ -21,10 +21,19 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
+  brand: {
+    type: String,
+    required: false,
+  },
+  rating: {
+    type: Number,
+    required: false
+  }
 });
 
 const product = mongoose.model('products', productSchema);
 
 module.exports = {
   product,
+  productSchema, // Agregando la exportación del esquema
 };
