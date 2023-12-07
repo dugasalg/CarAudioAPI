@@ -1,4 +1,7 @@
 const { quotation } = require('../models/cotizaciones.model');
+const User = require('../models/user.models');
+const mongoose = require('mongoose');
+
 
 // Create - Agregar una nueva cotización
 exports.createQuotation = async (req, res) => {
@@ -50,5 +53,37 @@ exports.getCotizacionesPorUsuario = async (req, res) => {
     res.status(200).json(quotations);
   } catch (error) {
     res.status(500).json({ error: 'Error al obtener las cotizaciones del usuario' });
+  }
+};
+
+// Sumar las cotizaciones de un usuario
+exports.getTotalQuotationsByUser = async (req, res) => {
+  const { userId } = req.params.userId;
+
+  // Validación de userId
+  if (!userId || typeof userId !== 'string') {
+    return res.status(400).json({ error: 'userId inválido' });
+  }
+
+  // Si usas Mongoose y los IDs son de tipo ObjectId, puedes hacer una validación adicional
+  if (!mongoose.Types.ObjectId.isValid(userId)) {
+    return res.status(400).json({ error: 'userId no es un ObjectId válido' });
+  }
+
+  try {
+    // Verificar si el usuario existe en la base de datos
+    const userExists = await User.findById(userId);
+    if (!userExists) {
+      return res.status(404).json({ error: 'Usuario no encontrado' });
+    }
+
+    // Consulta para obtener las cotizaciones del usuario
+    // Asume que el identificador del usuario está asociado a las cotizaciones de alguna manera
+    const quotations = await quotation.find({ userId: userId });
+    const total = quotations.reduce((sum, quotation) => sum + quotation.totalPrice, 0);
+    
+    res.status(200).json({ total });
+  } catch (error) {
+    res.status(500).json({ error: 'Error al calcular el total de las cotizaciones' });
   }
 };

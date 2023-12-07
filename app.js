@@ -15,6 +15,8 @@ var usersRouter = require('./routes/users');
 var productRouter = require('./routes/products');
 var categoryRouter = require('./routes/categorias');
 var favoriteRoutes = require('./routes/favorite');
+var cotizacionesRouter = require('./routes/cotizaciones');
+var carritoRouter = require('./routes/carrito')
 
 const authRouter = require('./routes/auth');
 
@@ -46,6 +48,8 @@ app.use('/products', productRouter);
 app.use('/categorias', categoryRouter);
 app.use('/favorite',favoriteRoutes)
 app.use('/auth',authRouter);
+app.use('/cotizacion', cotizacionesRouter);
+app.use('/carrito', carritoRouter);
 
 
 
