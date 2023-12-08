@@ -83,30 +83,31 @@ async function loginUsuario(req,res){
   }
 }
 
-async function editarUsuario(req,res){
-    const {userID} = req.params;
-    const updateData = req.body;
+async function editarUsuario(req, res) {
+  const { userID } = req.params;
+  const { username, password, birthDate, address } = req.body;
 
-    try{  
-        // Actualizar Onformacion  
-        const updatedUser = await User.findByIdAndUpdate(userId, updateData, { new: true });
-        if(!updatedUser){
-            return res.status(404).json({ message: 'Usuario no encontrado' });
-        }
-        // Enviar respuesta
-        res.status(200).json({
-            message: 'Usuario actualizado correctamente',
-            obj: updatedUser
-        });
-    } catch (err){
-        console.log(err);
-        res.status(500).json({
-            message: 'Error al actualizar el usuario',
-            obj: {}
-        })
-    }
+  try {
+      const updatedUser = await User.findByIdAndUpdate(
+          userID,
+          { username, password, birthDate, address },
+          { new: true }
+      );
+      if (!updatedUser) {
+          return res.status(404).json({ message: 'Usuario no encontrado' });
+      }
+      res.status(200).json({
+          message: 'Usuario actualizado correctamente',
+          usuario: updatedUser
+      });
+  } catch (err) {
+      console.log(err);
+      res.status(500).json({
+          message: 'Error al actualizar el usuario',
+      });
+  }
+}
 
-};
 
 
 // En user.controller.js
@@ -149,4 +150,4 @@ async function agregarCarritoPorId(req, res) {
   
 
 
-module.exports = {registrarUsuario, loginUsuario, agregarCarritoPorId}
+module.exports = {registrarUsuario, loginUsuario, agregarCarritoPorId, editarUsuario}

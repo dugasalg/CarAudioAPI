@@ -3,8 +3,9 @@ var router = express.Router();
 
 const {
   registrarUsuario,
-   loginUsuario,
-  agregarCarritoPorId
+  loginUsuario,
+  agregarCarritoPorId,
+  editarUsuario
 } = require('../controllers/user.controller.js');
 
 /* GET users listing. */
@@ -15,6 +16,8 @@ router.get('/', function(req, res, next) {
 router.post('/registrar',registrarUsuario);
 router.post('/login',loginUsuario);
 router.post('/agregar-carrito/:idUsuario', agregarCarritoPorId);
+router.put('/usuario/:userID', editarUsuario);
+
 
 
 module.exports = router;
