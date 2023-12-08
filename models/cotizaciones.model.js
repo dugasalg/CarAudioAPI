@@ -4,10 +4,12 @@ const quotationSchema = new mongoose.Schema({
   clientName: {
     type: String,
     required: true,
+    index:true
   },
   product: {
     type: String,
     required: true,
+    index:true
   },
   quantity: {
     type: Number,

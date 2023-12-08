@@ -4,7 +4,8 @@ const {carritoSchema} = require('./carrito.model');
 const userSchema = new mongoose.Schema({
     username: {
         type: String,
-        required: true
+        required: true,
+        index: true
     },
     password: {
         type: String,

@@ -63,3 +63,16 @@ exports.getCarritobyId = async(req, res) => {
     res.status(500).json({error: 'Error al obtener carrito'});
   }
 };
+
+exports.deleteProductoById = async(req, res) => {
+  const {idProducto} = req.params
+  try{
+    if(!idProducto){
+      return res.status(404).json({error: "no se encontro el producto"})
+    }
+    await product.findByIdAndRemove(idProducto);
+    res.status(204).send()
+  } catch (error){
+    res.status(500).json({error: "Error al eliminar producto"});
+  }
+};
