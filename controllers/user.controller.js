@@ -83,14 +83,21 @@ async function loginUsuario(req,res){
   }
 }
 
+// En tu controlador de usuarios
+
 async function editarUsuario(req, res) {
   const { userID } = req.params;
   const { username, password, birthDate, address } = req.body;
 
   try {
+      let updateData = { username, birthDate, address };
+      if (password) {
+          updateData.password = password; // Considera hashear la contraseña antes de guardarla
+      }
+
       const updatedUser = await User.findByIdAndUpdate(
           userID,
-          { username, password, birthDate, address },
+          updateData,
           { new: true }
       );
       if (!updatedUser) {
@@ -107,6 +114,9 @@ async function editarUsuario(req, res) {
       });
   }
 }
+
+module.exports = { editarUsuario };
+
 
 
 
