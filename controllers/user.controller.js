@@ -115,9 +115,6 @@ async function editarUsuario(req, res) {
   }
 }
 
-module.exports = { editarUsuario };
-
-
 
 
 // En user.controller.js
@@ -157,7 +154,23 @@ async function agregarCarritoPorId(req, res) {
       res.status(500).json({ error: 'Error interno del servidor' });
     }
   };
-  
+
+  async function eliminarUsuario(req, res) {
+    const { userID } = req.params;
+
+    try {
+        const user = await User.findByIdAndDelete(userID);
+
+        if (!user) {
+            return res.status(404).json({ mensaje: 'Usuario no encontrado' });
+        }
+
+        res.status(200).json({ mensaje: 'Usuario eliminado con éxito' });
+    } catch (error) {
+        console.error('Error al eliminar el usuario:', error);
+        res.status(500).json({ error: 'Error interno del servidor' });
+    }
+};  
 
 
-module.exports = {registrarUsuario, loginUsuario, agregarCarritoPorId, editarUsuario}
+module.exports = {registrarUsuario, loginUsuario, agregarCarritoPorId, editarUsuario, eliminarUsuario}

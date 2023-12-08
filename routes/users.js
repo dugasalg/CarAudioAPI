@@ -5,7 +5,8 @@ const {
   registrarUsuario,
   loginUsuario,
   agregarCarritoPorId,
-  editarUsuario
+  editarUsuario,
+  eliminarUsuario
 } = require('../controllers/user.controller.js');
 
 /* GET users listing. */
@@ -17,7 +18,7 @@ router.post('/registrar',registrarUsuario);
 router.post('/login',loginUsuario);
 router.post('/agregar-carrito/:idUsuario', agregarCarritoPorId);
 router.put('/usuario/:userID', editarUsuario);
-
+router.delete('/eliminar-usuario/:id', eliminarUsuario)
 
 
 module.exports = router;
